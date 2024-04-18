@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="styles/styles.css">
+	 <script src="scripts/index.js"></script>
+</head>
+<body>
+		<div class="background-wrap" id="cloudy" style="display: none;">
+			<div class="cloud1">
+        		<div class="cloud"></div>
+    		</div>
+
+    		<div class="cloud2">
+      	  		<div class="cloud"></div>
+    		</div>
+
+    		<div class="cloud3">
+       	 		<div class="cloud"></div>
+    		</div>
+    		<div class="cloud4">
+        		<div class="cloud"></div>
+    		</div>
+    		<div class="cloud5">
+        		<div class="cloud"></div>
+   	 		</div>
+ 		</div>
+	 
+	 <div class="background-wrap" id="sunny" style="display: none;">
+		 <div class="sun"></div>
+	 </div>
+	 
+	 <div class="background-wrap" id="rainy" style="display: none;">
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    			<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 		<div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 <div class="raindrop">
+    		<div class="inner">💧</div>
+ 		 </div>
+		 
+	 </div>
+	 	
+	 <div class="background-wrap" id="snow" style="display: none;">
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+		 <div class="snowflake">
+    		<div class="inner">❅</div>
+ 		 </div>
+	 </div>
+		
+	</div>
+	<h1 id="title">Whats The Weather?</h1>
+	<div id='search'>
+		<input id="search-bar" placeholder="Enter City" ></input>
+		<button id="search-btn">Search</button>
+	</div>
+	<div id="settings-section"  style="display: none;"> 
+			<div id="close">
+				<input id='close-btn' type="image" src="media/Close.png" >
+			</div>
+			<div class='group'>
+				<p>location</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Temperature</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Summary</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Feels-Like</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Humidity</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Pressure</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Temp-max</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Temp-min</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Rain</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Wind-speed</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Sunrise</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+			<div class='group'>
+				<p>Sunset</p>
+				<input  class="toggle-button" id='toggle-on' type="image" src="media/Toggle-on.png" >
+				<input class="toggle-button" id='toggle-off' type="image" src="media/Toggle-off.png" style="display: none;">
+			</div>
+
+	</div>
+
+	<div class="container" id="container">
+	    <div class="box">
+	        <div class="location"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Temperature"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Summary"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Feels-Like"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Humidity"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Pressure"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Temp-max"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Temp-min"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Rain"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Wind-speed"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Sunrise"></div>
+	    </div>
+	    <div class="box">
+	        <div class="Sunset"></div>
+	    </div>
+		<div class="settings-box">
+			<input id='settings' type="image" src="media/Gear.png">
+		</div>
+	</div>
+	
+	</body>
+</html>
