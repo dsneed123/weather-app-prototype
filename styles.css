@@ -601,6 +601,7 @@ body {
     border-color: white;
     font-size: 15pt;
     width: 8vw;
+    height : 8vw;
     margin-bottom: 3px;
     margin-left: 3px;
     border-radius: 12px;
@@ -720,4 +721,17 @@ body {
         color: white; /* Choose a suitable color */
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow for depth */
     }
+	.day{
+    background-color: rgb(115, 147, 179);
+    padding : 2vw;
+    border-color: white;
+    font-size: 8pt;
+    width: 5vw;
+    height : 5vw;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    border-radius: 3px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+}
   }
