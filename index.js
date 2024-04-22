@@ -352,7 +352,7 @@ weatherStatistics.forEach(statistic => {
             // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
             const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
-
+            console.log(formattedTemperature);
             const firstTemperature = formattedTemperature[0];
             console.log(firstTemperature);
 
