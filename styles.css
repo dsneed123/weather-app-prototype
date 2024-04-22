@@ -595,18 +595,23 @@ body {
     flex-wrap: nowrap;
     
 }
-.day{
+.day {
     background-color: rgb(115, 147, 179);
-    padding : 2vw;
+    padding: 2vw;
     border-color: white;
     font-size: 15pt;
-    width: 8vw;
-    height : 8vw;
+    width: 10vw;
+    height: 10vw;
+    text-align: center;
+    justify-content: center;
+    display: flex;
     margin-bottom: 3px;
     margin-left: 3px;
     border-radius: 12px;
     color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    align-content: center;
+    flex-direction: column;
 }
 @media only screen and (max-width: 500px) {
     body {
@@ -721,17 +726,22 @@ body {
         color: white; /* Choose a suitable color */
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow for depth */
     }
-	.day{
+.day {
     background-color: rgb(115, 147, 179);
-    padding : 2vw;
+    padding: 2vw;
     border-color: white;
-    font-size: 8pt;
-    width: 5vw;
-    height : 5vw;
+    font-size: 6pt;
+    width: 8vw;
+    height: 8vw;
+    text-align: center;
+    justify-content: center;
+    display: flex;
     margin-bottom: 3px;
     margin-left: 3px;
-    border-radius: 3px;
+    border-radius: 12px;
     color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    align-content: center;
+    flex-direction: column;
 }
   }
