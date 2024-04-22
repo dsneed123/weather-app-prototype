@@ -348,14 +348,11 @@ weatherStatistics.forEach(statistic => {
             const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
             const temperature = forecast.main.temp;
             const weatherDescription = forecast.weather[0].description;
-            if (temperature) {
-            const { temperature } = temperature;
-                checkTemperatureAndDisplayWarning(temperature);
-            }
+            
             // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
             const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
-
+             checkTemperatureAndDisplayWarning(temperature)
             // Fill in the day element with forecast information
             dayElement.innerHTML = `
                 <h3>${formattedDate}</h3>
