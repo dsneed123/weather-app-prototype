@@ -589,3 +589,117 @@ body {
 	width:100px;
 	height:auto;
 }
+@media only screen and (max-width: 500px) {
+    body {
+      font-size: 1.5rem;
+    }
+  
+    .container {
+      width: 90vw;
+      height: auto;
+      margin-top: 10%;
+      
+    }
+  
+    .box{
+        width: 75px;
+        height: 75px;
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+       
+        margin: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+        font-weight: bold;
+        font-size: 8pt;
+    }
+    .settings-box{
+        width: 75px;
+        height: 75px;
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+       
+        margin: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+        font-weight: bold;
+        font-size: 8pt;
+    }
+    #settings{
+        width:25px;
+        height: 25px;
+    
+    }
+ 
+    .group{
+        height: 75px; /* Set height to create square boxes */
+        width: 75px; /* Set width to create square boxes */
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        border-radius: 12px;
+        margin: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+        font-weight: bold;
+        font-size : 7pt;
+    }
+    #close{
+        top : 0px;
+        right : 0px;
+    
+        width:100%;
+    }
+    #close-btn{
+        width:15px;
+        height :auto;
+    }
+    .toggle-button{
+        width:30px;
+        height:auto;
+    }
+    #search{
+        width:50px;
+        height : 10%;
+        margin:5%;
+        display : flex;
+        align-items: center;
+        justify-content : center;
+        
+    }
+    #search-bar{
+        width: 30vw;
+        height: 5vh;
+        font-size: 9pt;
+    }
+    #search-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: gray;
+        color: white;
+        border: none;
+        font-size: 7pt;
+        padding: 10px 20px;
+        cursor: pointer;
+        
+        height: 5vh;
+        border-radius: 2px;
+        margin-left: 1%;
+        text-align: center;
+    }
+    #search-btn:hover{
+        height : 15px;
+        border-color : 3px solid black;
+    }
+    #title{
+        margin-top:10%;
+        
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        font-size: 15pt;
+        color: white; /* Choose a suitable color */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow for depth */
+    }
+  }
