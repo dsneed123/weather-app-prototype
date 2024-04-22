@@ -333,6 +333,13 @@ weatherStatistics.forEach(statistic => {
             console.error('No forecast data available');
             return;
         }
+            const firstForecastTemperature = forecastData.list[0].main.temp;
+            
+            // Convert temperature from Kelvin to Celsius
+            const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
+            
+            // Pass the temperature to the checkTemperatureAndDisplayWarning function
+            checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
 
         // Loop through the forecast data to fill in each day
         for (let i = 0; i < 7; i++) {
@@ -352,11 +359,9 @@ weatherStatistics.forEach(statistic => {
             // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
             const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
-            console.log(formattedTemperature);
-            const firstTemperature = formattedTemperature[0];
-            console.log(firstTemperature);
+   
 
-             checkTemperatureAndDisplayWarning(formattedTemperature)
+             
             // Fill in the day element with forecast information
             dayElement.innerHTML = `
                 <h3>${formattedDate}</h3>
