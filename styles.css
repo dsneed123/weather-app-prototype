@@ -730,9 +730,9 @@ body {
     background-color: rgb(115, 147, 179);
     padding: 2vw;
     border-color: white;
-    font-size: 9pt;
-    width: 15vw;
-    height: 15vw;
+    font-size: 6pt;
+    width: 13vw;
+    height: 13vw;
     text-align: center;
     justify-content: center;
     display: flex;
