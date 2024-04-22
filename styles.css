@@ -589,6 +589,24 @@ body {
 	width:100px;
 	height:auto;
 }
+#forecast-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+}
+.day{
+    background-color: rgb(115, 147, 179);
+    padding : 2vw;
+    border-color: white;
+    font-size: 15pt;
+    width: 8vw;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+}
 @media only screen and (max-width: 500px) {
     body {
       font-size: 1.5rem;
