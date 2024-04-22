@@ -14,7 +14,16 @@ body {
         font-family: sans-serif;
         color: rgb(7, 9, 10);
     }
-	
+    .warning {
+        color: white; /* Set text color to white */
+        font-size: 2em; /* Set font size to 2em */
+        font-weight: bold; /* Set font weight to bold */
+        background-color: red; /* Set background color to red */
+        padding: 20px; /* Add some padding for better visual appearance */
+        border-radius: 10px; /* Add rounded corners to the box */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
+        margin-bottom: 20px; /* Add margin to separate warning messages */
+    }
 .container {
     height: auto;
     width: 80%;
