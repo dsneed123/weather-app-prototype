@@ -754,5 +754,16 @@ body {
     align-content: center;
     flex-direction: column;
 }
+.warning {
+        color: white; /* Set text color to white */
+        font-size: 8pt; /* Set font size to 2em */
+        font-weight: bold; /* Set font weight to bold */
+        background-color: red; /* Set background color to red */
+        padding: 20px; /* Add some padding for better visual appearance */
+        border-radius: 10px; /* Add rounded corners to the box */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
+        margin-bottom: 10px; /* Add margin to separate warning messages */
+	margin-top: 50vh;
+    }
 
   }
