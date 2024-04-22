@@ -23,7 +23,7 @@ body {
         border-radius: 10px; /* Add rounded corners to the box */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
         margin-bottom: 20px; /* Add margin to separate warning messages */
-	margin-top: 10vh;
+	margin-top: 70vh;
     }
 .container {
     height: auto;
