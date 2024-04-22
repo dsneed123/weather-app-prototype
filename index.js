@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             button.addEventListener('click', function() {
                 // Toggle the src attribute of the clicked button to switch between on and off states
                 const src = this.src;
-                const newSrc = src.includes('Toggle-on.png') ? 'Toggle-off.png' : 'Toggle-on.png';
+                const newSrc = src.includes('Toggle-on.png') ? 'media/Toggle-off.png' : 'media/Toggle-on.png';
                 this.src = newSrc;
             });
         });
@@ -257,6 +257,96 @@ weatherStatistics.forEach(statistic => {
             setWeather(sunny, rainy, snowy, cloudy);
         }
     }
+    async function getUserCityName() {
+        try {
+            // Fetch IP address information from ipinfo.io
+            const response = await fetch('https://ipinfo.io/json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch IP address information');
+            }
+            
+            // Parse the response JSON
+            const data = await response.json();
+    
+            // Extract city name from the response
+            const cityName = data.city;
+    
+            return cityName;
+        } catch (error) {
+            console.error('Error getting user city name:', error);
+            return null;
+        }
+    }
+    
+    async function getForecastData() {
+        // Retrieve the user's city name
+        const city = await getUserCityName(); // Make sure to await the getUserCityName function
+    
+        // Check if city is available
+        if (!city) {
+            console.error('Error: City name not available');
+            return null;
+        }
+    
+        // Construct the API URL with the city name and API key
+        const apiKey = '6b5b252a322150bfc49b05e1714871f1'; // Replace 'YOUR_API_KEY' with your actual API key
+        const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+    
+        try {
+            // Fetch forecast data from the API
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch forecast data');
+            }
+    
+            // Parse the response JSON
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching forecast data:', error);
+            return null;
+        }
+    }
+    async function fillForecastData() {
+        const forecastData = await getForecastData();
+        const forecastContainer = document.getElementById('forecast-container');
+
+        if (!forecastData || !forecastData.list) {
+            console.error('No forecast data available');
+            return;
+        }
+
+        // Loop through the forecast data to fill in each day
+        for (let i = 0; i < 7; i++) {
+            const dayElement = forecastContainer.children[i];
+            const forecast = forecastData.list[i * 5]; // Get data for every 8th element (every 24 hours)
+
+            if (!dayElement || !forecast) {
+                console.error('Error filling forecast data');
+                return;
+            }
+
+            // Extract relevant information from the forecast data
+            const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
+            const temperature = forecast.main.temp;
+            const weatherDescription = forecast.weather[0].description;
+
+            // Format date and temperature
+            const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
+
+            // Fill in the day element with forecast information
+            dayElement.innerHTML = `
+                <h3>${formattedDate}</h3>
+                <p>${formattedTemperature}°C</p>
+                <p>${weatherDescription}</p>
+            `;
+        }
+    }
+
+    // Call the function to fill in forecast data
+    fillForecastData();
     
 
     getUserCoordinates()
