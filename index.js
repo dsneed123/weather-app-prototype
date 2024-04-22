@@ -337,7 +337,7 @@ weatherStatistics.forEach(statistic => {
             
             // Convert temperature from Kelvin to Celsius
             const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
-            
+            console.log(firstForecastTemperatureCelsius);
             // Pass the temperature to the checkTemperatureAndDisplayWarning function
             checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
 
