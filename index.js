@@ -41,7 +41,24 @@ document.addEventListener("DOMContentLoaded", function() {
         updateWeatherDisplay();
     });
 
-    // Function to update weather display based on settings
+    function checkTemperatureAndDisplayWarning(temperature) {
+        const heatWarning = document.getElementById('heat-warning');
+        const coldWarning = document.getElementById('cold-warning');
+
+        // If temperature exceeds certain thresholds, display the corresponding warning box
+        if (temperature > 30) {
+            heatWarning.style.display = 'block'; // Show heat warning
+            coldWarning.style.display = 'none'; // Hide cold warning
+        } else if (temperature < 10) {
+            coldWarning.style.display = 'block'; // Show cold warning
+            heatWarning.style.display = 'none'; // Hide heat warning
+        } else {
+            // Hide both warning boxes if temperature is within normal range
+            heatWarning.style.display = 'none';
+            coldWarning.style.display = 'none';
+        }
+    }
+
    // Function to update weather display based on settings
 function updateWeatherDisplay() {
     const enabledStatistics = [];
@@ -331,7 +348,10 @@ weatherStatistics.forEach(statistic => {
             const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
             const temperature = forecast.main.temp;
             const weatherDescription = forecast.weather[0].description;
-
+            if (temperature) {
+            const { temperature } = temperature;
+                checkTemperatureAndDisplayWarning(temperature);
+            }
             // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
             const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
