@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             button.addEventListener('click', function() {
                 // Toggle the src attribute of the clicked button to switch between on and off states
                 const src = this.src;
-                const newSrc = src.includes('Toggle-on.png') ? 'media/Toggle-off.png' : 'media/Toggle-on.png';
+                const newSrc = src.includes('Toggle-on.png') ? 'Toggle-off.png' : 'Toggle-on.png';
                 this.src = newSrc;
             });
         });
