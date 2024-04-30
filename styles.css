@@ -15,15 +15,16 @@ body {
         color: rgb(7, 9, 10);
     }
     .warning {
-        color: white; /* Set text color to white */
-        font-size: 2em; /* Set font size to 2em */
-        font-weight: bold; /* Set font weight to bold */
-        background-color: red; /* Set background color to red */
-        padding: 20px; /* Add some padding for better visual appearance */
-        border-radius: 10px; /* Add rounded corners to the box */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
-        margin-bottom: 20px; /* Add margin to separate warning messages */
-	margin-top: 70vh;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        background-color: red;
+        padding: 20px;
+        width: 90vw;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+        margin-top: 10%;
     }
 .container {
     height: auto;

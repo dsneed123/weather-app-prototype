@@ -222,6 +222,7 @@ weatherStatistics.forEach(statistic => {
                     break;
                 case 'Temperature':
                     box.firstElementChild.textContent = `${Math.floor(data.main.temp - kelvin)}°C`;
+                    checkTemperatureAndDisplayWarning(Math.floor(data.main.temp - kelvin));
                     break;
                 case 'Summary':
                     box.firstElementChild.textContent = data.weather[0].description;
@@ -332,7 +333,6 @@ async function fillForecastData(city) {
     for (let i = 0; i < 7; i++) {
         const dayElement = forecastContainer.children[i];
         const forecast = forecastData.list[i * 8]; // Adjusted to get data for every 24 hours
-
         const date = new Date(forecast.dt * 1000);
         const temperature = forecast.main.temp;
         const weatherDescription = forecast.weather[0].description;
