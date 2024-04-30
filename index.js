@@ -409,7 +409,7 @@ async function updateForecastData(searchQuery) {
             const forecast = forecastData.list[forecastIndex];
 
             if (!dayElement || !forecast) {
-                console.error('Error filling forecast data for index', forecastIndex);
+                console.error('Error filling forecast data for index', forecastIndex, 'Day Element:', dayElement, 'Forecast:', forecast);
                 continue; // Skip to the next iteration if there's an error
             }
 
@@ -433,6 +433,7 @@ async function updateForecastData(searchQuery) {
         console.error('Error updating forecast data:', error);
     }
 }
+
 
 
 
