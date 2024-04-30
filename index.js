@@ -405,7 +405,7 @@ async function updateForecastData(searchQuery) {
         // Loop through the forecast data to fill in each day
         for (let i = 0; i < 7; i++) {
             const dayElement = forecastContainer.children[i];
-            const forecastIndex = i * 8; // Get data for every 8th element (every 24 hours)
+            const forecastIndex = i * 8 + 3; // Get data for 12:00 PM (midday) for each day
             const forecast = forecastData.list[forecastIndex];
 
             if (!dayElement || !forecast) {
@@ -433,6 +433,7 @@ async function updateForecastData(searchQuery) {
         console.error('Error updating forecast data:', error);
     }
 }
+
 
 
 
