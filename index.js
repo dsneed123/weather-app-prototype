@@ -295,153 +295,68 @@ weatherStatistics.forEach(statistic => {
         }
     }
     
-    async function getForecastData() {
-        // Retrieve the user's city name
-        const city = await getUserCityName(); // Make sure to await the getUserCityName function
+async function getForecastData(city) {
+    const apiKey = '6b5b252a322150bfc49b05e1714871f1';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
     
-        // Check if city is available
-        if (!city) {
-            console.error('Error: City name not available');
-            return null;
+    try {
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch forecast data');
         }
-    
-        // Construct the API URL with the city name and API key
-        const apiKey = '6b5b252a322150bfc49b05e1714871f1'; // Replace 'YOUR_API_KEY' with your actual API key
-        const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
-    
-        try {
-            // Fetch forecast data from the API
-            const response = await fetch(apiUrl);
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch forecast data');
-            }
-    
-            // Parse the response JSON
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error fetching forecast data:', error);
-            return null;
-        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching forecast data:', error);
+        return null;
     }
-    async function fillForecastData() {
-        const forecastData = await getForecastData();
+}
+
+async function fillForecastData(city) {
+    try {
+        const forecastData = await getForecastData(city);
         const forecastContainer = document.getElementById('forecast-container');
 
         if (!forecastData || !forecastData.list) {
             console.error('No forecast data available');
             return;
         }
-            const firstForecastTemperature = forecastData.list[0].main.temp;
-            
-            // Convert temperature from Kelvin to Celsius
-            const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
-            console.log(firstForecastTemperatureCelsius);
-            // Pass the temperature to the checkTemperatureAndDisplayWarning function
-            checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
 
-        // Loop through the forecast data to fill in each day
+        const firstForecastTemperature = forecastData.list[0].main.temp;
+        const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
+        console.log(firstForecastTemperatureCelsius);
+        checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
+
         for (let i = 0; i < 7; i++) {
             const dayElement = forecastContainer.children[i];
-            const forecast = forecastData.list[i * 5]; // Get data for every 8th element (every 24 hours)
+            const forecast = forecastData.list[i * 8]; // Adjusted to get data for every 24 hours
 
             if (!dayElement || !forecast) {
                 console.error('Error filling forecast data');
                 return;
             }
 
-            // Extract relevant information from the forecast data
-            const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
+            const date = new Date(forecast.dt * 1000);
             const temperature = forecast.main.temp;
             const weatherDescription = forecast.weather[0].description;
             
-            // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
-            const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
-   
+            const formattedTemperature = Math.round(temperature - 273.15);
 
-             
-            // Fill in the day element with forecast information
             dayElement.innerHTML = `
                 <h3>${formattedDate}</h3>
                 <p>${formattedTemperature}°C</p>
                 <p>${weatherDescription}</p>
             `;
         }
-    }
-
-    // Call the function to fill in forecast data
-    fillForecastData();
-    
-
-    getUserCoordinates()
-    .then(coordinates => {
-        if (coordinates) {
-            console.log('User coordinates:', coordinates);
-            const { latitude, longitude } = coordinates;
-            return getWeatherData(latitude, longitude);
-        } else {
-            console.log('Error: Coordinates not available');
-            throw new Error('Coordinates not available');
-        }
-    })
-    .then(data => {
-        displayWeatherData(data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-async function updateForecastData(searchQuery) {
-    try {
-        const forecastData = await getForecastData(searchQuery);
-        const forecastContainer = document.getElementById('forecast-container');
-
-        if (!forecastData || !forecastData.list || forecastData.list.length === 0) {
-            console.error('Invalid forecast data received:', forecastData);
-            return;
-        }
-
-        // Initialize an array to track which days have been displayed
-        const displayedDays = [];
-
-        // Loop through the forecast data to fill in each day
-        forecastData.list.forEach(forecast => {
-            // Check if the forecast object has the 'dt' property
-            if (!forecast || !forecast.dt) {
-                console.error('Invalid forecast object:', forecast);
-                return; // Skip to the next iteration if the forecast object is incomplete
-            }
-
-            // Extract the date of the forecast
-            const date = new Date(forecast.dt * 1000);
-            const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
-
-            // Check if this day has already been displayed
-            if (!displayedDays.includes(formattedDate)) {
-                // Fill in the day element with forecast information
-                const temperature = Math.round(forecast.main.temp - 273.15); // Convert temperature from Kelvin to Celsius
-                const weatherDescription = forecast.weather[0].description;
-                const forecastElement = document.createElement('div');
-                forecastElement.innerHTML = `
-                    <h3>${formattedDate}</h3>
-                    <p>${temperature}°C</p>
-                    <p>${weatherDescription}</p>
-                `;
-                forecastContainer.appendChild(forecastElement);
-
-                // Add this day to the displayedDays array to avoid duplication
-                displayedDays.push(formattedDate);
-            }
-        });
     } catch (error) {
-        console.error('Error updating forecast data:', error);
+        console.error('Error filling forecast data:', error);
     }
 }
 
-
-
-   document.getElementById("search-btn").addEventListener("click", async () => {
+document.getElementById("search-btn").addEventListener("click", async () => {
     const searchQuery = document.getElementById("search-bar").value.trim();
     
     if (searchQuery) {
@@ -454,7 +369,7 @@ async function updateForecastData(searchQuery) {
                 displayWeatherData(weatherData);
                 
                 // Update forecast data based on the searched city
-                await updateForecastData(searchQuery);
+                await fillForecastData(searchQuery); // Pass the searched location
             } else {
                 console.log('Error: Coordinates not available');
             }
@@ -466,5 +381,6 @@ async function updateForecastData(searchQuery) {
     }
 });
 
-});
+
+
 
