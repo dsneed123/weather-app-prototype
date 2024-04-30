@@ -392,23 +392,73 @@ weatherStatistics.forEach(statistic => {
     .catch(error => {
         console.error('Error:', error);
     });
+    async function updateForecastData(searchQuery) {
+    try {
+        const forecastData = await getForecastData(searchQuery);
+        const forecastContainer = document.getElementById('forecast-container');
 
-    document.getElementById("search-btn").addEventListener("click", async () => {
-        const searchQuery = document.getElementById("search-bar").value.trim();
-        
-        if (searchQuery) {
+        if (!forecastData || !forecastData.list) {
+            console.error('No forecast data available');
+            return;
+        }
+
+        // Loop through the forecast data to fill in each day
+        for (let i = 0; i < 7; i++) {
+            const dayElement = forecastContainer.children[i];
+            const forecast = forecastData.list[i * 8]; // Get data for every 8th element (every 24 hours)
+
+            if (!dayElement || !forecast) {
+                console.error('Error filling forecast data');
+                return;
+            }
+
+            // Extract relevant information from the forecast data
+            const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
+            const temperature = forecast.main.temp;
+            const weatherDescription = forecast.weather[0].description;
+            
+            // Format date and temperature
+            const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
+   
+
+            // Fill in the day element with forecast information
+            dayElement.innerHTML = `
+                <h3>${formattedDate}</h3>
+                <p>${formattedTemperature}°C</p>
+                <p>${weatherDescription}</p>
+            `;
+        }
+    } catch (error) {
+        console.error('Error updating forecast data:', error);
+    }
+}
+
+
+   document.getElementById("search-btn").addEventListener("click", async () => {
+    const searchQuery = document.getElementById("search-bar").value.trim();
+    
+    if (searchQuery) {
+        try {
             const coordinates = await getCoordinatesFromSearch(searchQuery);
             
             if (coordinates) {
                 const { latitude, longitude } = coordinates;
                 const weatherData = await getWeatherData(latitude, longitude);
                 displayWeatherData(weatherData);
+                
+                // Update forecast data based on the searched city
+                await updateForecastData(searchQuery);
             } else {
                 console.log('Error: Coordinates not available');
             }
-        } else {
-            console.log('Error: Please enter a city');
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
         }
-    });
+    } else {
+        console.log('Error: Please enter a city');
+    }
+});
+
 });
 
