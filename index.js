@@ -380,7 +380,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
         console.log('Error: Please enter a city');
     }
 });
-
+});
 
 
 
