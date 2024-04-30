@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (temperature > 30) {
             heatWarning.style.display = 'block'; // Show heat warning
             coldWarning.style.display = 'none'; // Hide cold warning
-        } else if (temperature < 10) {
+        } else if (temperature < 3) {
             coldWarning.style.display = 'block'; // Show cold warning
             heatWarning.style.display = 'none'; // Hide heat warning
         } else {
