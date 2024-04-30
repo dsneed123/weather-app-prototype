@@ -437,6 +437,7 @@ async function updateForecastData(searchQuery) {
 
 
 
+
    document.getElementById("search-btn").addEventListener("click", async () => {
     const searchQuery = document.getElementById("search-bar").value.trim();
     
