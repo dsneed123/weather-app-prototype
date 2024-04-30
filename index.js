@@ -402,37 +402,42 @@ async function updateForecastData(searchQuery) {
             return;
         }
 
+        // Initialize an array to track which days have been displayed
+        const displayedDays = [];
+
         // Loop through the forecast data to fill in each day
-        for (let i = 0; i < 7; i++) {
-            const dayElement = forecastContainer.children[i];
-            const forecastIndex = i * 8 + 3; // Get data for 12:00 PM (midday) for each day
-            const forecast = forecastData.list[forecastIndex];
+        forecastData.list.forEach(forecast => {
+            // Check if the forecast object has the 'dt' property
+            if (!forecast || !forecast.dt) {
+                console.error('Invalid forecast object:', forecast);
+                return; // Skip to the next iteration if the forecast object is incomplete
+            }
 
-       
-
-            // Extract relevant information from the forecast data
-            const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
-            const temperature = forecast.main.temp;
-            const weatherDescription = forecast.weather[0].description;
-            
-            // Format date and temperature
+            // Extract the date of the forecast
+            const date = new Date(forecast.dt * 1000);
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
-            const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
 
-            // Fill in the day element with forecast information
-            dayElement.innerHTML = `
-                <h3>${formattedDate}</h3>
-                <p>${formattedTemperature}°C</p>
-                <p>${weatherDescription}</p>
-            `;
-        }
+            // Check if this day has already been displayed
+            if (!displayedDays.includes(formattedDate)) {
+                // Fill in the day element with forecast information
+                const temperature = Math.round(forecast.main.temp - 273.15); // Convert temperature from Kelvin to Celsius
+                const weatherDescription = forecast.weather[0].description;
+                const forecastElement = document.createElement('div');
+                forecastElement.innerHTML = `
+                    <h3>${formattedDate}</h3>
+                    <p>${temperature}°C</p>
+                    <p>${weatherDescription}</p>
+                `;
+                forecastContainer.appendChild(forecastElement);
+
+                // Add this day to the displayedDays array to avoid duplication
+                displayedDays.push(formattedDate);
+            }
+        });
     } catch (error) {
         console.error('Error updating forecast data:', error);
     }
 }
-
-
-
 
 
 
