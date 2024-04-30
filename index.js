@@ -77,8 +77,6 @@ function updateWeatherDisplay() {
     const weatherStatistics = document.querySelectorAll('.box');
 
 // Loop through weather statistics elements to update display
-    // Loop through weather statistics elements to update display
-// Loop through weather statistics elements to update display
 weatherStatistics.forEach(statistic => {
     // Get the statistic label associated with the current element
     const statisticLabelElement = statistic.querySelector('.location, .Temperature, .Summary, .Feels-Like, .Humidity, .Pressure, .Temp-max, .Temp-min, .Rain, .Wind-speed, .Sunrise, .Sunset');
@@ -244,7 +242,7 @@ weatherStatistics.forEach(statistic => {
                     box.firstElementChild.textContent = `Min Temp: ${Math.floor(data.main.temp_min - kelvin)}°C`;
                     break;
                 case 'Rain':
-                    box.firstElementChild.textContent = data.rain ? `Rain (1h): ${data.rain['1h']}mm` : "";
+                    box.firstElementChild.textContent = data.rain ? `Rain (1h): ${data.rain['1h']}mm` : "Precipitation: 0";
                     break;
                 case 'Wind-speed':
                     box.firstElementChild.textContent = `Wind Speed: ${data.wind.speed} m/s`;
@@ -294,7 +292,8 @@ weatherStatistics.forEach(statistic => {
             return null;
         }
     }
-    
+
+//get the forcast data for a city
 async function getForecastData(city) {
     const apiKey = '6b5b252a322150bfc49b05e1714871f1';
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
@@ -314,48 +313,57 @@ async function getForecastData(city) {
     }
 }
 
+// load the forcast data on the page
 async function fillForecastData(city) {
-    try {
-        const forecastData = await getForecastData(city);
-        const forecastContainer = document.getElementById('forecast-container');
 
-        if (!forecastData || !forecastData.list) {
-            console.error('No forecast data available');
-            return;
-        }
+    const forecastData = await getForecastData(city);
+    const forecastContainer = document.getElementById('forecast-container');
 
-        const firstForecastTemperature = forecastData.list[0].main.temp;
-        const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
-        console.log(firstForecastTemperatureCelsius);
-        checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
-
-        for (let i = 0; i < 7; i++) {
-            const dayElement = forecastContainer.children[i];
-            const forecast = forecastData.list[i * 8]; // Adjusted to get data for every 24 hours
-
-            if (!dayElement || !forecast) {
-                console.error('Error filling forecast data');
-                return;
-            }
-
-            const date = new Date(forecast.dt * 1000);
-            const temperature = forecast.main.temp;
-            const weatherDescription = forecast.weather[0].description;
-            
-            const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
-            const formattedTemperature = Math.round(temperature - 273.15);
-
-            dayElement.innerHTML = `
-                <h3>${formattedDate}</h3>
-                <p>${formattedTemperature}°C</p>
-                <p>${weatherDescription}</p>
-            `;
-        }
-    } catch (error) {
-        console.error('Error filling forecast data:', error);
+    if (!forecastData || !forecastData.list) {
+        console.error('No forecast data available');
+        return;
     }
-}
 
+    const firstForecastTemperature = forecastData.list[0].main.temp;
+    const firstForecastTemperatureCelsius = Math.round(firstForecastTemperature - 273.15);
+    console.log(firstForecastTemperatureCelsius);
+    checkTemperatureAndDisplayWarning(firstForecastTemperatureCelsius);
+
+    for (let i = 0; i < 7; i++) {
+        const dayElement = forecastContainer.children[i];
+        const forecast = forecastData.list[i * 8]; // Adjusted to get data for every 24 hours
+
+        const date = new Date(forecast.dt * 1000);
+        const temperature = forecast.main.temp;
+        const weatherDescription = forecast.weather[0].description;
+        
+        const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
+        const formattedTemperature = Math.round(temperature - 273.15);
+
+        dayElement.innerHTML = `
+            <h3>${formattedDate}</h3>
+            <p>${formattedTemperature}°C</p>
+            <p>${weatherDescription}</p>
+        `;
+    }
+    
+}
+// Get user's coordinates and display weather data
+    (async () => {
+        const userCoordinates = await getUserCoordinates();
+        if (userCoordinates) {
+                const { latitude, longitude } = userCoordinates;
+                const weatherData = await getWeatherData(latitude, longitude);
+                displayWeatherData(weatherData);
+        }
+        })().catch(error => console.error('Error', error));
+//on load fill with current city name
+    (async () => {
+        const city = await getUserCityName();
+        fillForecastData(city);
+    })().catch(error => console.error('Error getting user city name:', error));
+
+//search button
 document.getElementById("search-btn").addEventListener("click", async () => {
     const searchQuery = document.getElementById("search-bar").value.trim();
     
@@ -367,7 +375,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
                 const { latitude, longitude } = coordinates;
                 const weatherData = await getWeatherData(latitude, longitude);
                 displayWeatherData(weatherData);
-                
+                console.log(searchQuery);
                 // Update forecast data based on the searched city
                 await fillForecastData(searchQuery); // Pass the searched location
             } else {
@@ -380,7 +388,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
         console.log('Error: Please enter a city');
     }
 });
-}
+})
 
 
 
