@@ -392,24 +392,25 @@ weatherStatistics.forEach(statistic => {
     .catch(error => {
         console.error('Error:', error);
     });
-    async function updateForecastData(searchQuery) {
+async function updateForecastData(searchQuery) {
     try {
         const forecastData = await getForecastData(searchQuery);
         const forecastContainer = document.getElementById('forecast-container');
 
-        if (!forecastData || !forecastData.list) {
-            console.error('No forecast data available');
+        if (!forecastData || !forecastData.list || forecastData.list.length === 0) {
+            console.error('Invalid forecast data received:', forecastData);
             return;
         }
 
         // Loop through the forecast data to fill in each day
         for (let i = 0; i < 7; i++) {
             const dayElement = forecastContainer.children[i];
-            const forecast = forecastData.list[i * 8]; // Get data for every 8th element (every 24 hours)
+            const forecastIndex = i * 8; // Get data for every 8th element (every 24 hours)
+            const forecast = forecastData.list[forecastIndex];
 
             if (!dayElement || !forecast) {
-                console.error('Error filling forecast data');
-                return;
+                console.error('Error filling forecast data for index', forecastIndex);
+                continue; // Skip to the next iteration if there's an error
             }
 
             // Extract relevant information from the forecast data
@@ -420,7 +421,6 @@ weatherStatistics.forEach(statistic => {
             // Format date and temperature
             const formattedDate = date.toLocaleDateString('en-US', { weekday: 'short' });
             const formattedTemperature = Math.round(temperature - 273.15); // Convert temperature from Kelvin to Celsius
-   
 
             // Fill in the day element with forecast information
             dayElement.innerHTML = `
@@ -433,6 +433,7 @@ weatherStatistics.forEach(statistic => {
         console.error('Error updating forecast data:', error);
     }
 }
+
 
 
    document.getElementById("search-btn").addEventListener("click", async () => {
