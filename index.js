@@ -408,10 +408,7 @@ async function updateForecastData(searchQuery) {
             const forecastIndex = i * 8 + 3; // Get data for 12:00 PM (midday) for each day
             const forecast = forecastData.list[forecastIndex];
 
-            if (!dayElement || !forecast) {
-                console.error('Error filling forecast data for index', forecastIndex, 'Day Element:', dayElement, 'Forecast:', forecast);
-                continue; // Skip to the next iteration if there's an error
-            }
+       
 
             // Extract relevant information from the forecast data
             const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to JavaScript Date object
