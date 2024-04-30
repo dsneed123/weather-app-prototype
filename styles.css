@@ -91,7 +91,7 @@ body {
     justify-content: center;
 } 
 #search-bar{
-	height: 30px;
+	height: 35px;
 	width : 70%;
 	font-size: 15pt;
 	text-align: center;
@@ -116,13 +116,13 @@ body {
     font-size: 12pt;
     padding: 10px 20px;
     cursor: pointer;
-    height: 25px;
+    height: 35px;
     border-radius: 4px;
     margin-left: 1%;
     text-align: center;
 }
 #search-btn:hover{
-	height : 30px;
+	height : 40px;
 	border-color : 3px solid black;
 }
 #title{
