@@ -122,8 +122,9 @@ body {
     text-align: center;
 }
 #search-btn:hover{
-	height : 40px;
+	
 	border-color : 3px solid black;
+    background-color: rgb(74, 73, 73);
 }
 #title{
 	margin-top:5vh;
